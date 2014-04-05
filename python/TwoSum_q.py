@@ -3,6 +3,19 @@
 
 from array import *
 
-oneArray = array('i', [1,2,3,4,5])
+oneArray = [1,2,3,4,5,9]
+bitResult = 0
+bitMask = 0x1
+result = False
 for i in oneArray:
-	print(i)
+#	print(i)
+    if bitResult & (bitMask << i):
+        print("find one")
+        result = True
+        break
+    else:
+        bitResult |= bitMask<<(10-i)
+if(result):
+    print("YES")
+else:
+    print("NO")
