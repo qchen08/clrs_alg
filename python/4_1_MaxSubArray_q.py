@@ -10,18 +10,25 @@ def FindMaxSubArray(oneArray):
     start = 0
     end   = 0
     sum   = 0
+    index = -1;
     result = -sys.maxint - 1
+    resultStart = 0
+    resultEnd = 0
     for i in oneArray:
+        index += 1
         sum += i
-        if sum < 0:
-            end += 1
+        if sum > result:
+            result = sum
+            end = index
+            resultStart = start
+            resultEnd = end
+        elif sum < 0:
+            end = index + 1
             start = end
             sum = 0
-        elif sum > result:
-            result = sum
-            end += 1
-    print 'the larges sum is:', result, 'start:', start, 'end:', end
+#       print 'index=', index, result, sum, start, end, resultStart, resultEnd
+    print 'the larges sum is:', result, 'start:', resultStart, 'end:', resultEnd
 #    return result
 
-a = [11,22,-21,33,44,55, -1, 10]
+a = [-2, -12, -3, -44, -1, -52, -18, -10, -64, -41]
 FindMaxSubArray(a)

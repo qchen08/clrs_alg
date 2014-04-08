@@ -2,7 +2,8 @@
 
 MaxStartIdx = 0
 MaxEndIdx = 0
-array = [-2, 1, -3, 4, -1, 2, 1, -10, 4, 1]
+#array = [-2, 1, -3, 4, -1, 2, 1, -10, 4, 1]
+array = [-2, -12, -3, -44, -1, -52, -18, -10, -64, -41]
 
 def FindMaxSubArray(array):
 	global MaxStartIdx
