@@ -5,7 +5,8 @@ import sys
 
 # Original code
 # Parameter: array
-# Return: the largest sum of a subarray
+# Print: the largest sum and range
+# Be careful: range record staff
 def FindMaxSubArray(oneArray):
     start = 0
     end   = 0
@@ -30,5 +31,10 @@ def FindMaxSubArray(oneArray):
     print 'the larges sum is:', result, 'start:', resultStart, 'end:', resultEnd
 #    return result
 
-a = [-2, -12, -3, -44, -1, -52, -18, -10, -64, -41]
+a = [-2, -12, -3, -44, -11, -52, -18, -10, -64, -41, -1]
 FindMaxSubArray(a)
+
+# Exercise 4.1-1
+# If all the elementes in the array are negative values, then the algorithm will return the one with minimum abs value.
+
+# Exercise 4.1-2
