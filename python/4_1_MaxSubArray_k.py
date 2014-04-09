@@ -1,14 +1,12 @@
 # Exercise 4.1-1
-
+import sys
 MaxStartIdx = 0
 MaxEndIdx = 0
-#array = [-2, 1, -3, 4, -1, 2, 1, -10, 4, 1]
-array = [-2, -12, -3, -44, -1, -52, -18, -10, -64, -41]
 
 def FindMaxSubArray(array):
 	global MaxStartIdx
 	global MaxEndIdx
-	MaxSum = 0
+	MaxSum = -sys.maxint-1
 	i = 0
 	StartIdx = 0
 	EndIdx = 0
@@ -36,7 +34,9 @@ def print_subarray(array):
 		print(a),
 	print("'")
 
+array = [int(x) for x in sys.argv[1:]]
+print 'Input: ', array
 ret = FindMaxSubArray(array)
-print('Sum = {}'.format(ret))
+print('Sum = {}, '.format(ret)), 
 print_subarray(array)
-
+print ''
