@@ -31,7 +31,10 @@ def FindMaxSubArray(oneArray):
     print 'the larges sum is:', result, 'start:', resultStart, 'end:', resultEnd
 #    return result
 
-a = [-2, -12, -3, -44, -11, -52, -18, -10, -64, -41, -1]
+
+# Main function
+#a = [-2, -12, -3, -44, -11, -52, -18, -10, -64, -41, -1]
+a = [int(x) for x in sys.argv[1:]]
 FindMaxSubArray(a)
 
 # Exercise 4.1-1
