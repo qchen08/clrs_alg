@@ -4,37 +4,12 @@
 import sys
 #import pudb; pu.db
 
+# Result Object
 class Result:
      def __init__(self, summ=0, start=0, end=0):
          self.sum = summ
          self.start = start
          self.end = end
-
-# Original code
-# Parameter: array
-# Print: the largest sum and range
-# Be careful: range record staff
-def FindMaxSubArray(oneArray):
-    start = 0
-    end   = 0
-    sum   = 0
-    index = -1;
-    result = -sys.maxint - 1
-    resultStart = 0
-    resultEnd = 0
-    for i in oneArray:
-        index += 1
-        sum += i
-        if sum > result:
-            result = sum
-            end = index
-            resultStart = start
-            resultEnd = end
-        elif sum < 0:
-            end = index + 1
-            start = end
-            sum = 0
-    return Result(result, resultStart, resultEnd)
 
 # Exercise 4.1-1
 # If all the elementes in the array are negative values, then the algorithm will return the one with minimum abs value.
@@ -116,6 +91,28 @@ def RecursvieFindMaxSubArray(oneArray, left, high):
 # return an empty array with sum = 0.
 
 # Exercise 4.1-5
+# Nonrecursive, linear
+def FindMaxSubArray(oneArray):
+    start = 0
+    end   = 0
+    sum   = 0
+    index = -1;
+    result = -sys.maxint - 1
+    resultStart = 0
+    resultEnd = 0
+    for i in oneArray:
+        index += 1
+        sum += i
+        if sum > result:
+            result = sum
+            end = index
+            resultStart = start
+            resultEnd = end
+        elif sum < 0:
+            end = index + 1
+            start = end
+            sum = 0
+    return Result(result, resultStart, resultEnd)
 
     
 # Main function
