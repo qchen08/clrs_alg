@@ -3,7 +3,6 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int> > ret;
 class BITSET{
 	private:
 		std::vector<unsigned long long> bitset;
@@ -11,29 +10,32 @@ class BITSET{
 	public:
 		BITSET(int size){
 			int i;
-			for(i = 0; i < size / sizeof(unsigned long long)+1; i++){
+			for(i = 0; i < size / sizeof(unsigned long long)/8+1; i++){
 				bitset.push_back(0);
 			}
 			s = size;
 		}
 
 		bool operator[](int i) const{
-			int index = i/sizeof(unsigned long long);
+			int index = i/sizeof(unsigned long long)/8;
 			unsigned long long num = bitset[index];
 			int reminder = i - i * index;
 			return (num >> reminder) & 0x1;
 		}
 
-		void print(){
-			std::cout << bitset[0] << std::endl;
-		}
-
 		bool empty() const{
-			int i;
-			for(i = 0; i < s; i++){
-				if((*this)[i])
+			int i = 0;
+			for(i = 0; i < s / sizeof(unsigned long long)/8; i++){
+				if(!bitset[i]){
 					return false;
+				}
 			}
+			unsigned long long num = bitset[i];
+			unsigned long long mask = (0x1 << (s - s * i)) - 1;
+			num &= mask;
+			if(num)
+				return false;
+
 			return true;
 		}
 
@@ -69,7 +71,7 @@ bool dec(const BITSET &bitset, const std::vector<int>& cntVec, std::vector<int>&
 	return false;
 }
 
-void print_set(const BITSET &bitset, const std::vector<int>& keyVec, const std::vector<int>& cntVec){
+void print_set(vector<vector<int> > &ret, const BITSET &bitset, const std::vector<int>& keyVec, const std::vector<int>& cntVec){
 	int i, j;
 	std::vector<int> cntTmp;
 	cntTmp.resize(cntVec.size());
@@ -107,6 +109,7 @@ void print_set(const BITSET &bitset, const std::vector<int>& keyVec, const std::
 class Solution {
 	public:
 		vector<vector<int> > subsetsWithDup(vector<int> &S) {
+			vector<vector<int> > ret;
 			int i, j;
 			std::map<int, int> cntMap;
 			std::vector<int> keyVec;
@@ -129,10 +132,9 @@ class Solution {
 			int N = cntMap.size();
 			BITSET mybitset(N);
 
-			for(i = 0; i < N*N+1; i ++){
+			while(1){
 				mybitset.inc();
-				//		mybitset.print();
-				print_set(mybitset, keyVec, cntVec);
+				print_set(ret, mybitset, keyVec, cntVec);
 				if(mybitset.empty()){
 					break;
 				}
