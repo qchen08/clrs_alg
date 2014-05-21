@@ -4,34 +4,37 @@
 using namespace std;
 
 class BITSET{
+	typedef unsigned long long BITNUM;
 	private:
-		std::vector<unsigned long long> bitset;
-		int s;
+		std::vector<BITNUM> bitset;
+		int bits;
+		int unitSize;
 	public:
 		BITSET(int size){
+			unitSize = sizeof(BITNUM)*8;
 			int i;
-			for(i = 0; i < size / sizeof(unsigned long long)/8+1; i++){
+			for(i = 0; i < size / unitSize+1; i++){
 				bitset.push_back(0);
 			}
-			s = size;
+			bits = size;
 		}
 
 		bool operator[](int i) const{
-			int index = i/sizeof(unsigned long long)/8;
-			unsigned long long num = bitset[index];
+			int index = i/sizeof(BITNUM)/8;
+			BITNUM num = bitset[index];
 			int reminder = i - i * index;
 			return (num >> reminder) & 0x1;
 		}
 
 		bool empty() const{
 			int i = 0;
-			for(i = 0; i < s / sizeof(unsigned long long)/8; i++){
+			for(i = 0; i < bits / unitSize; i++){
 				if(!bitset[i]){
 					return false;
 				}
 			}
-			unsigned long long num = bitset[i];
-			unsigned long long mask = (0x1 << (s - s * i)) - 1;
+			BITNUM num = bitset[i];
+			BITNUM mask = (0x1 << (bits - bits * i)) - 1;
 			num &= mask;
 			if(num)
 				return false;
@@ -40,7 +43,7 @@ class BITSET{
 		}
 
 		BITSET& inc() {
-			unsigned long long  max_num = -1;
+			BITNUM max_num = -1;
 			int i = 0;
 			while(1){
 				if (bitset[i] == max_num){
