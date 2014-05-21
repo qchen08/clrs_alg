@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
+import java.io.File;
 
 
-public class Pro_62_Subsets2 {
+public class Subsets {
 	
 	private HashMap<Integer, HashSet<ArrayList<Integer>>> globmap = null;
 	
@@ -62,6 +64,38 @@ public class Pro_62_Subsets2 {
             result.add(alist1);
         }
         return result;
+    }
+    
+    public static void main(String[] args) {
+        Subsets subset = new Subsets();
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(args[0]));
+        }catch(Exception e) {
+            
+        }
+        int[] num = null;
+        boolean first = true;
+        int size = 0;
+        int i = 0;
+        while(scanner.hasNextInt())
+        {
+            if(first) {
+                first = false;
+                size = scanner.nextInt();
+                num = new int[size];
+            } else
+            num[i++] = scanner.nextInt();
+        }
+        for(ArrayList<Integer> oneres : subset.subsetsWithDup(num)) {
+            System.out.print("[");
+            for(i = 0; i < oneres.size(); i++)
+                if(i != oneres.size() - 1)
+                    System.out.print(oneres.get(i) + ",");
+                else
+                    System.out.print(oneres.get(i));
+            System.out.println("],");
+        }
     }
 
 }
